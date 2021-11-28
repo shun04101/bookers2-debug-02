@@ -7,18 +7,17 @@ class BookCommentsController < ApplicationController
     @book_comment.book_id = @book.id
     @book_comment.user_id = current_user.id
     if @book_comment.save
-      redirect_to book_path(@book.id)
+      render :book_comments # render先にjsファイルを指定
     else
-      render 'books/show'
+      render :error # render先にjsファイルを指定
     end
   end
 
   def destroy
     @book = Book.find(params[:book_id])
-    # book_comments = @book.book_comments
     book_comment = @book.book_comments.find(params[:id])
     book_comment.destroy
-    redirect_to request.referer
+    render :book_comments # render先にjsファイルを指定
   end
 
   private
