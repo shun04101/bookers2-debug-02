@@ -4,14 +4,14 @@ class FavoritesController < ApplicationController
   def create
     @book = Book.find(params[:book_id])
     favorite = @book.favorites.new(user_id: current_user.id)
-    favorite.save
+    favorite.save # app/views/favorites/create.js.erbを参照する
     # redirect_to request.referer
   end
 
   def destroy
     @book = Book.find(params[:book_id])
     favorite = @book.favorites.find_by(user_id: current_user.id)
-    favorite.destroy
+    favorite.destroy # app/views/favorites/destroy.js.erbを参照する
     # redirect_to request.referer
   end
 end
